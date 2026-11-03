@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard — Promoteur des Établissements Privés</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+
+<body>
+
+    <!-- OVERLAY -->
+    <div class="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo-icon">
+                <svg viewBox="0 0 24 24">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                </svg>
+            </div>
+            <div style="display:flex;flex-direction:column">
+                <span class="brand-name">Promoteur EP</span>
+                <span style="font-size:0.75rem;opacity:0.7">Administration</span>
+            </div>
+        </div>
+        <nav class="nav-links">
+            <a class="nav-item active" href="admin.html">
+                <svg viewBox="0 0 24 24">
+                    <rect x="3" y="3" width="7" height="7" rx="1"></rect>
+                    <rect x="14" y="3" width="7" height="7" rx="1"></rect>
+                    <rect x="14" y="14" width="7" height="7" rx="1"></rect>
+                    <rect x="3" y="14" width="7" height="7" rx="1"></rect>
+                </svg>
+                Tableau de bord
+            </a>
+            <a class="nav-item" href="dossiers.html">
+                <svg viewBox="0 0 24 24">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                    <polyline points="10 9 9 9 8 9"></polyline>
+                </svg>
+                Dossiers
+            </a>
+            <a class="nav-item" href="rdv.html">
+                <svg viewBox="0 0 24 24">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                </svg>
+                Rendez-vous
+            </a>
+
+            <div style="flex:1"></div>
+            <a class="nav-item" style="color:#ffffff;margin-bottom:12px">
+                <svg viewBox="0 0 24 24">
+                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                    <polyline points="16 17 21 12 16 7"></polyline>
+                    <line x1="21" y1="12" x2="9" y2="12"></line>
+                </svg>
+                Déconnexion
+            </a>
+        </nav>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+        <header>
+            <div class="header-title">
+                <h2>Tableau de bord</h2>
+                <p>Bienvenue sur votre espace d'administration</p>
+            </div>
+            <div class="header-actions">
+                <button class="mobile-menu-btn" onclick="toggleSidebar()">
+                    <svg viewBox="0 0 24 24">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+                <div class="search-bar">
+                    <svg viewBox="0 0 24 24">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                    <input type="text" placeholder="Recherche rapide...">
+                </div>
+                <div class="notif-btn" onclick="simulateNewDossier()">
+                    <div class="notif-badge"></div>
+                    <svg viewBox="0 0 24 24">
+                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                    </svg>
+                </div>
+                <div class="user-profile">
+                    <div class="avatar">AD</div>
+                    <div class="user-info">
+                        <div>Admin</div>
+                    </div>
+                    <svg viewBox="0 0 24 24" width="16" height="16" stroke="gray" fill="none" stroke-width="2">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </div>
+            </div>
+        </header>
+
+        <div class="content-scroll">
+            <!-- STATS -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-info">
+                        <h3>Total Dossiers</h3>
+                        <div class="value">24</div>
+                    </div>
+                    <div class="stat-icon bg-blue-light">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                            <polyline points="10 9 9 9 8 9"></polyline>
+                        </svg>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-info">
+                        <h3>En attente</h3>
+                        <div class="value">8</div>
+                    </div>
+                    <div class="stat-icon bg-orange-light">
+                        <svg viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-info">
+                        <h3>Traités</h3>
+                        <div class="value">14</div>
+                    </div>
+                    <div class="stat-icon bg-green-light">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                        </svg>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-info">
+                        <h3>Rejetés</h3>
+                        <div class="value">2</div>
+                    </div>
+                    <div class="stat-icon bg-red-light">
+                        <svg viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="15" y1="9" x2="9" y2="15"></line>
+                            <line x1="9" y1="9" x2="15" y2="15"></line>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- QUICK ACCESS FOLDERS -->
+            <!-- PENDING DOSSIERS -->
+            <div class="section-header" id="pending-header" style="display:none">
+                <div class="section-title">Dossiers en attente de validation</div>
+            </div>
+            <div class="folder-grid" id="pending-grid" style="display:none; margin-bottom: 40px;">
+                <!-- Pending items will be injected here -->
+            </div>
+
+            <!-- QUICK ACCESS FOLDERS -->
+            <div class="section-header">
+                <div class="section-title">Dossiers en cours récents</div>
+            </div>
+
+            <div class="folder-grid">
+                <!-- Card 1 -->
+                <div class="folder-card" onclick="window.location.href='dossiers.html'">
+                    <div class="folder-top">
+                        <div class="folder-icon blue">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z">
+                                </path>
+                            </svg>
+                        </div>
+                        <svg viewBox="0 0 24 24" width="16" height="16" stroke="gray" fill="none" stroke-width="2">
+                            <circle cx="12" cy="12" r="1"></circle>
+                            <circle cx="19" cy="12" r="1"></circle>
+                            <circle cx="5" cy="12" r="1"></circle>
+                        </svg>
+                    </div>
+                    <div class="folder-info">
+                        <h4>G.S. La Réussite</h4>
+                        <p>Jean Koffi</p>
+                    </div>
+                    <div class="folder-progress">
+                        <div class="progress-label">
+                            <span>Validation</span>
+                            <span>60%</span>
+                        </div>
+                        <div class="progress-track">
+                            <div class="progress-fill" style="width:60%;background:var(--blue)"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="folder-card" onclick="window.location.href='dossiers.html'">
+                    <div class="folder-top">
+                        <div class="folder-icon orange">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z">
+                                </path>
+                            </svg>
+                        </div>
+                        <svg viewBox="0 0 24 24" width="16" height="16" stroke="gray" fill="none" stroke-width="2">
+                            <circle cx="12" cy="12" r="1"></circle>
+                            <circle cx="19" cy="12" r="1"></circle>
+                            <circle cx="5" cy="12" r="1"></circle>
+                        </svg>
+                    </div>
+                    <div class="folder-info">
+                        <h4>Collège Le Savoir</h4>
+                        <p>Marc H.</p>
+                    </div>
+                    <div class="folder-progress">
+                        <div class="progress-label">
+                            <span>Inspection</span>
+                            <span>40%</span>
+                        </div>
+                        <div class="progress-track">
+                            <div class="progress-fill" style="width:40%;background:var(--warning)"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="folder-card" onclick="window.location.href='dossiers.html'">
+                    <div class="folder-top">
+                        <div class="folder-icon purple">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z">
+                                </path>
+                            </svg>
+                        </div>
+                        <svg viewBox="0 0 24 24" width="16" height="16" stroke="gray" fill="none" stroke-width="2">
+                            <circle cx="12" cy="12" r="1"></circle>
+                            <circle cx="19" cy="12" r="1"></circle>
+                            <circle cx="5" cy="12" r="1"></circle>
+                        </svg>
+                    </div>
+                    <div class="folder-info">
+                        <h4>Jardin d'Éden</h4>
+                        <p>Sandrine A.</p>
+                    </div>
+                    <div class="folder-progress">
+                        <div class="progress-label">
+                            <span>Admin</span>
+                            <span>20%</span>
+                        </div>
+                        <div class="progress-track">
+                            <div class="progress-fill" style="width:20%;background:#9333EA"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- See All Card -->
+                <div class="folder-card" onclick="window.location.href='dossiers.html'"
+                    style="display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--blue);cursor:pointer;background:#F9FAFB;border:2px dashed #E5E7EB">
+                    <div
+                        style="width:48px;height:48px;border-radius:50%;background:#E3F2FD;display:flex;align-items:center;justify-content:center;margin-bottom:12px">
+                        <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" fill="none"
+                            stroke-width="2">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </div>
+                    <div style="font-weight:600">Voir tous les dossiers</div>
+                </div>
+
+            </div>
+
+            <!-- CHARTS & ACTIVITY -->
+            <div class="dashboard-grid">
+                <!-- CHART -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Analyse des dépôts</div>
+                        <select
+                            style="border:1px solid #ddd;padding:6px 12px;border-radius:8px;font-family:inherit;font-size:0.85rem">
+                            <option>Derniers 6 mois</option>
+                            <option>Cette année</option>
+                        </select>
+                    </div>
+                    <div class="chart-wrapper">
+                        <div class="chart-row">
+                            <!-- Y-AXIS LABEL -->
+                            <div class="y-axis-label"
+                                style="writing-mode:vertical-rl;transform:rotate(180deg);font-size:0.75rem;color:var(--text-gray);font-weight:600;height:240px;text-align:center">
+                                Nombre de dossiers
+                            </div>
+
+                            <!-- Y-AXIS GRADUATIONS -->
+                            <div class="y-axis">
+                                <span>50</span>
+                                <span>40</span>
+                                <span>30</span>
+                                <span>20</span>
+                                <span>10</span>
+                                <span>0</span>
+                            </div>
+
+                            <!-- CHART -->
+                            <div class="chart-container" style="flex:1">
+                                <div class="bar-group">
+                                    <div class="bar" style="height:30%" data-value="12"></div>
+                                    <div class="bar-label">Jan</div>
+                                </div>
+                                <div class="bar-group">
+                                    <div class="bar" style="height:45%" data-value="18"></div>
+                                    <div class="bar-label">Fév</div>
+                                </div>
+                                <div class="bar-group">
+                                    <div class="bar" style="height:25%" data-value="10"></div>
+                                    <div class="bar-label">Mar</div>
+                                </div>
+                                <div class="bar-group">
+                                    <div class="bar" style="height:60%" data-value="24"></div>
+                                    <div class="bar-label">Avr</div>
+                                </div>
+                                <div class="bar-group">
+                                    <div class="bar" style="height:80%" data-value="32"></div>
+                                    <div class="bar-label">Mai</div>
+                                </div>
+                                <div class="bar-group">
+                                    <div class="bar" style="height:55%" data-value="22"></div>
+                                    <div class="bar-label">Juin</div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- X-AXIS LABEL -->
+                        <div class="x-axis-label"
+                            style="font-size:0.75rem;color:var(--text-gray);font-weight:600;margin-left:40px">
+                            Mois
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RECENT ACTIVITY -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Activités récentes</div>
+                    </div>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-dot blue"></div>
+                            <div class="timeline-date">À l'instant</div>
+                            <div class="timeline-content"><b>Jean Koffi</b> a soumis un nouveau dossier pour <i>G.S.
+                                    La
+                                    Réussite</i></div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot green"></div>
+                            <div class="timeline-date">Il y a 2h</div>
+                            <div class="timeline-content">Le dossier de <b>Aimée Tossa</b> a été validé par
+                                l'inspection.</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot orange"></div>
+                            <div class="timeline-date">Hier, 16:30</div>
+                            <div class="timeline-content">Demande de pièces complémentaires pour <b>Marc H.</b>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot blue"></div>
+                            <div class="timeline-date">Hier, 10:15</div>
+                            <div class="timeline-content"><b>Nouvel utilisateur</b> inscrit : École Les Élites</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </main>
+
+    <!-- TOAST -->
+    <div class="toast" id="toast">
+        <div
+            style="width: 40px; height: 40px; background: #E3F2FD; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #1565C0;">
+            <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" fill="none" stroke-width="2">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+            </svg>
+        </div>
+        <div>
+            <div style="font-weight: 600; font-size: 0.95rem;">Nouveau dossier !</div>
+            <div style="font-size: 0.85rem; color: #6B7280;">Une nouvelle demande a été soumise.</div>
+        </div>
+    </div>
+
+    <script src="js/dashboard.js"></script>
+    <script>
+        function toggleSidebar() {
+            document.querySelector('.sidebar').classList.toggle('active');
+            document.querySelector('.sidebar-overlay').classList.toggle('active');
+        }
+    </script>
+
+</body>
+
+</html>

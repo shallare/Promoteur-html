@@ -1,0 +1,2816 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Promoteur des Établissements Privés — Sécurisez l'ouverture de votre structure éducative</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <style>
+    /* ============================================
+   VARIABLES
+   ============================================ */
+    :root {
+      --blue: #1565C0;
+      --blue-dark: #0D47A1;
+      --blue-light: #E3F2FD;
+      --blue-muted: #90CAF9;
+      --dark: #0f1419;
+      --white: #fff;
+      --gray-50: #f8f9fa;
+      --gray-100: #f0f1f3;
+      --gray-200: #e2e4e8;
+      --gray-400: #9ca3af;
+      --gray-600: #6b7280;
+      --gray-800: #374151;
+      --radius: 16px;
+      --radius-sm: 10px;
+      --radius-lg: 24px;
+      --font-display: 'Montserrat', sans-serif;
+      --font-body: 'Poppins', sans-serif;
+      /* Mobile-first spacing */
+      --page-pad: 20px;
+      --section-pad-y: 64px;
+    }
+
+    /* ============================================
+   RESET & BASE (mobile-first)
+   ============================================ */
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--dark);
+      background: var(--white);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .page {
+      display: none;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    img,
+    svg {
+      max-width: 100%;
+    }
+
+    /* ============================================
+   NAVBAR (mobile-first)
+   ============================================ */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px var(--page-pad);
+      background: rgba(255, 255, 255, .92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--gray-200);
+    }
+
+    .logo {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.3rem;
+      color: var(--dark);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+
+    .logo-icon {
+      width: 34px;
+      height: 34px;
+      background: var(--blue);
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo-icon svg {
+      width: 18px;
+      height: 18px;
+      stroke: #fff;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* Desktop nav links - hidden on mobile */
+    .nav-links {
+      display: none;
+      list-style: none;
+    }
+
+    /* Mobile toggle */
+    .mobile-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: none;
+      border: none;
+      cursor: pointer;
+      width: 44px;
+      height: 44px;
+      /* touch-friendly */
+      border-radius: 10px;
+      transition: background .2s;
+    }
+
+    .mobile-toggle:active {
+      background: var(--gray-100);
+    }
+
+    .mobile-toggle svg {
+      width: 24px;
+      height: 24px;
+      stroke: var(--dark);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* Mobile menu overlay */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 99;
+      background: rgba(0, 0, 0, .4);
+      opacity: 0;
+      transition: opacity .3s;
+    }
+
+    .mobile-menu.open {
+      display: block;
+      opacity: 1;
+    }
+
+    .mobile-menu-panel {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 80%;
+      max-width: 320px;
+      height: 100%;
+      background: var(--white);
+      padding: 80px 28px 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      transform: translateX(100%);
+      transition: transform .35s cubic-bezier(.16, 1, .3, 1);
+      box-shadow: -8px 0 32px rgba(0, 0, 0, .1);
+      overflow-y: auto;
+    }
+
+    .mobile-menu.open .mobile-menu-panel {
+      transform: translateX(0);
+    }
+
+    .mobile-menu-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--gray-50);
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+    }
+
+    .mobile-menu-close svg {
+      width: 20px;
+      height: 20px;
+      stroke: var(--dark);
+      fill: none;
+      stroke-width: 2;
+    }
+
+    .mobile-menu-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 20px;
+      border-radius: 14px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--dark);
+      text-decoration: none;
+      transition: background .2s;
+      cursor: pointer;
+    }
+
+    .mobile-menu-link:active {
+      background: var(--gray-100);
+    }
+
+    .mobile-menu-link svg {
+      width: 20px;
+      height: 20px;
+      stroke: var(--gray-600);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .mobile-menu-cta {
+      margin-top: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding-top: 24px;
+      border-top: 1px solid var(--gray-200);
+    }
+
+    /* ============================================
+   BUTTONS (touch-friendly)
+   ============================================ */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 24px;
+      border-radius: 50px;
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: .95rem;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: all .3s ease;
+      min-height: 48px;
+      /* touch target */
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .btn svg {
+      width: 18px;
+      height: 18px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .btn-primary {
+      background: var(--dark);
+      color: var(--white);
+    }
+
+    .btn-primary:active {
+      background: #2d3440;
+    }
+
+    .btn-blue {
+      background: var(--blue);
+      color: var(--white);
+    }
+
+    .btn-blue:active {
+      background: var(--blue-dark);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--dark);
+      border: 2px solid var(--gray-200);
+    }
+
+    .btn-outline:active {
+      border-color: var(--dark);
+    }
+
+    .btn-whatsapp {
+      background: #25D366;
+      color: #fff;
+    }
+
+    .btn-whatsapp:active {
+      background: #1da851;
+    }
+
+    .btn-full {
+      width: 100%;
+    }
+
+    /* ============================================
+   HERO (mobile-first)
+   ============================================ */
+    .hero {
+      padding: 100px var(--page-pad) 48px;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .hero-content h1 {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 3rem;
+      line-height: 1.1;
+      letter-spacing: -.02em;
+      color: var(--dark);
+      margin-bottom: 16px;
+    }
+
+    .hero-content h1 .highlight {
+      color: var(--blue);
+      position: relative;
+    }
+
+    .hero-content h1 .highlight::after {
+      content: '';
+      position: absolute;
+      bottom: 2px;
+      left: 0;
+      right: 0;
+      height: 6px;
+      background: var(--blue-light);
+      border-radius: 3px;
+      z-index: -1;
+    }
+
+    .hero-content p {
+      font-size: 1rem;
+      color: var(--gray-600);
+      line-height: 1.65;
+      margin-bottom: 28px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .hero-visual {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 40px;
+      min-height: 280px;
+    }
+
+    .hero-blob {
+      width: 240px;
+      height: 240px;
+      background: linear-gradient(135deg, var(--blue-light) 0%, rgba(21, 101, 192, .12) 100%);
+      border-radius: 60% 40% 50% 50%/50% 60% 40% 50%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation: blobFloat 8s ease-in-out infinite;
+      z-index: 0;
+    }
+
+    @keyframes blobFloat {
+
+      0%,
+      100% {
+        border-radius: 60% 40% 50% 50%/50% 60% 40% 50%;
+      }
+
+      33% {
+        border-radius: 50% 60% 40% 50%/60% 40% 50% 50%;
+      }
+
+      66% {
+        border-radius: 40% 50% 60% 50%/50% 50% 40% 60%;
+      }
+    }
+
+    .hero-illustration {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 340px;
+    }
+
+    .floating-card {
+      position: absolute;
+      background: var(--white);
+      border-radius: 12px;
+      padding: 10px 14px;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, .08);
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      animation: floatUp 3s ease-in-out infinite;
+      font-size: .8rem;
+    }
+
+    @keyframes floatUp {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-8px);
+      }
+    }
+
+    .card-top {
+      top: 0;
+      right: 0;
+      animation-delay: 0s;
+    }
+
+    .card-mid {
+      bottom: 28%;
+      left: 0;
+      animation-delay: .6s;
+    }
+
+    .card-bot {
+      bottom: 0;
+      right: 5%;
+      animation-delay: 1.2s;
+    }
+
+    .fc-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .fc-icon svg {
+      width: 17px;
+      height: 17px;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      fill: none;
+    }
+
+    .fc-icon-blue {
+      background: var(--blue-light);
+    }
+
+    .fc-icon-blue svg {
+      stroke: var(--blue-dark);
+    }
+
+    .fc-icon-dark {
+      background: var(--gray-100);
+    }
+
+    .fc-icon-dark svg {
+      stroke: var(--dark);
+    }
+
+    .fc-label {
+      font-weight: 600;
+      font-size: .8rem;
+      color: var(--dark);
+      line-height: 1.2;
+    }
+
+    .fc-sub {
+      font-size: .7rem;
+      color: var(--gray-400);
+    }
+
+    /* ============================================
+   TRUST BAR
+   ============================================ */
+    .trust-bar {
+      padding: 24px var(--page-pad);
+      border-top: 1px solid var(--gray-200);
+      border-bottom: 1px solid var(--gray-200);
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .trust-bar::-webkit-scrollbar {
+      display: none;
+    }
+
+    .trust-label {
+      font-size: .75rem;
+      font-weight: 600;
+      color: var(--gray-400);
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      white-space: nowrap;
+    }
+
+    .trust-logos {
+      display: flex;
+      gap: 28px;
+      align-items: center;
+      white-space: nowrap;
+    }
+
+    .trust-logo {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: .95rem;
+      color: var(--gray-400);
+      opacity: .6;
+    }
+
+    /* ============================================
+   SECTIONS
+   ============================================ */
+    .section {
+      padding: var(--section-pad-y) var(--page-pad);
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .section-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 14px;
+      background: var(--blue-light);
+      color: var(--blue-dark);
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: .8rem;
+      margin-bottom: 12px;
+    }
+
+    .section-tag svg {
+      width: 14px;
+      height: 14px;
+      stroke: var(--blue-dark);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.7rem;
+      letter-spacing: -.02em;
+      color: var(--dark);
+      margin-bottom: 12px;
+    }
+
+    .section-desc {
+      font-size: .95rem;
+      color: var(--gray-600);
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.65;
+    }
+
+    /* ============================================
+   POLES / SERVICES
+   ============================================ */
+    .poles-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .pole-card {
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-lg);
+      padding: 28px 24px;
+      position: relative;
+      overflow: hidden;
+      transition: all .3s ease;
+      background: var(--white);
+    }
+
+    .pole-card.dark {
+      background: var(--dark);
+      border-color: var(--dark);
+      color: var(--white);
+    }
+
+    .pole-card.dark .pole-desc {
+      color: var(--gray-400);
+    }
+
+    .pole-card.dark .pole-item {
+      color: rgba(255, 255, 255, .8);
+      border-color: rgba(255, 255, 255, .1);
+    }
+
+    .pole-number {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 3rem;
+      color: var(--blue);
+      opacity: .12;
+      position: absolute;
+      top: 12px;
+      right: 20px;
+      line-height: 1;
+    }
+
+    .pole-icon-wrap {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+
+    .pole-card:not(.dark) .pole-icon-wrap {
+      background: var(--blue-light);
+    }
+
+    .pole-card:not(.dark) .pole-icon-wrap svg {
+      stroke: var(--blue-dark);
+    }
+
+    .pole-card.dark .pole-icon-wrap {
+      background: rgba(21, 101, 192, .2);
+    }
+
+    .pole-card.dark .pole-icon-wrap svg {
+      stroke: var(--blue);
+    }
+
+    .pole-icon-wrap svg {
+      width: 24px;
+      height: 24px;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .pole-label {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.2rem;
+      margin-bottom: 4px;
+    }
+
+    .pole-sublabel {
+      font-size: .8rem;
+      color: var(--blue);
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .pole-desc {
+      font-size: .9rem;
+      color: var(--gray-600);
+      line-height: 1.55;
+      margin-bottom: 20px;
+    }
+
+    .pole-items {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .pole-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 12px 14px;
+      border: 1px solid var(--gray-100);
+      border-radius: var(--radius-sm);
+      font-size: .85rem;
+      line-height: 1.5;
+      color: var(--gray-800);
+    }
+
+    .pole-item-icon {
+      flex-shrink: 0;
+      width: 22px;
+      height: 22px;
+      background: var(--blue);
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 1px;
+    }
+
+    .pole-item-icon svg {
+      width: 12px;
+      height: 12px;
+      stroke: #fff;
+      fill: none;
+      stroke-width: 2.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* ============================================
+   PROCESS
+   ============================================ */
+    .process-section {
+      background: var(--gray-50);
+      padding: var(--section-pad-y) var(--page-pad);
+    }
+
+    .process-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .process-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .process-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 20px;
+      border-radius: var(--radius);
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      transition: all .3s;
+    }
+
+    .process-left {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      flex-shrink: 0;
+    }
+
+    .process-num {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: .7rem;
+      color: var(--blue);
+      background: var(--blue-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+    }
+
+    .process-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: var(--blue-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .process-icon svg {
+      width: 22px;
+      height: 22px;
+      stroke: var(--blue-dark);
+      fill: none;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .process-right {
+      flex: 1;
+    }
+
+    .process-title {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: .95rem;
+      margin-bottom: 6px;
+    }
+
+    .process-desc {
+      font-size: .85rem;
+      color: var(--gray-600);
+      line-height: 1.55;
+    }
+
+    /* Arrow hidden on mobile */
+    .process-arrow {
+      display: none;
+    }
+
+    /* ============================================
+   WHY US
+   ============================================ */
+    .why-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .why-card {
+      padding: 28px 24px;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--gray-200);
+      position: relative;
+      overflow: hidden;
+      background: var(--white);
+    }
+
+    .why-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--blue);
+    }
+
+    .why-icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 12px;
+      background: var(--blue-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+
+    .why-icon svg {
+      width: 22px;
+      height: 22px;
+      stroke: var(--blue-dark);
+      fill: none;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .why-title {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.05rem;
+      margin-bottom: 8px;
+      color: var(--dark);
+    }
+
+    .why-desc {
+      font-size: .88rem;
+      color: var(--gray-600);
+      line-height: 1.6;
+    }
+
+    /* ============================================
+   CTA BANNER
+   ============================================ */
+    .cta-banner {
+      margin: 0 var(--page-pad) var(--section-pad-y);
+      background: var(--dark);
+      border-radius: var(--radius-lg);
+      padding: 36px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-banner::before {
+      content: '';
+      position: absolute;
+      top: -40%;
+      right: -20%;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(21, 101, 192, .2) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .cta-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-content h2 {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: var(--white);
+      margin-bottom: 10px;
+    }
+
+    .cta-content p {
+      color: var(--gray-400);
+      font-size: .95rem;
+      line-height: 1.55;
+    }
+
+    .cta-quote {
+      margin-top: 20px;
+      padding: 14px 18px;
+      background: rgba(21, 101, 192, .1);
+      border-left: 3px solid var(--blue);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      color: var(--blue-muted);
+      font-style: italic;
+      font-size: .88rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .cta-quote svg {
+      width: 18px;
+      height: 18px;
+      stroke: var(--blue);
+      fill: none;
+      stroke-width: 2;
+      flex-shrink: 0;
+    }
+
+    .cta-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      z-index: 1;
+    }
+
+    /* ============================================
+   FOOTER
+   ============================================ */
+    footer {
+      border-top: 1px solid var(--gray-200);
+      padding: 28px var(--page-pad);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      text-align: center;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    footer .logo {
+      font-size: 1.1rem;
+    }
+
+    footer p {
+      color: var(--gray-400);
+      font-size: .8rem;
+    }
+
+    /* ============================================
+   PAGE 2: SOUSCRIPTION
+   ============================================ */
+    .page2-hero {
+      padding: 100px var(--page-pad) 36px;
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .page2-hero h1 {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.8rem;
+      letter-spacing: -.02em;
+      margin-bottom: 12px;
+    }
+
+    .page2-hero p {
+      font-size: .95rem;
+      color: var(--gray-600);
+      max-width: 500px;
+      margin: 0 auto 32px;
+      line-height: 1.65;
+    }
+
+    .page2-illustration {
+      max-width: 200px;
+      margin: 0 auto 24px;
+    }
+
+    .form-container {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 0 var(--page-pad) 64px;
+    }
+
+    .form-card {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-lg);
+      padding: 24px 20px;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, .04);
+    }
+
+    .form-steps {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      margin-bottom: 32px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .form-steps::-webkit-scrollbar {
+      display: none;
+    }
+
+    .step {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+
+    .step-num {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: .8rem;
+      border: 2px solid var(--gray-200);
+      color: var(--gray-400);
+      transition: all .3s;
+    }
+
+    .step.active .step-num {
+      background: var(--blue);
+      border-color: var(--blue);
+      color: #fff;
+    }
+
+    .step.completed .step-num {
+      background: var(--blue);
+      border-color: var(--blue);
+      color: #fff;
+    }
+
+    .step-label {
+      font-size: .75rem;
+      font-weight: 600;
+      color: var(--gray-400);
+    }
+
+    .step.active .step-label {
+      color: var(--dark);
+    }
+
+    .step.completed .step-label {
+      color: var(--blue-dark);
+    }
+
+    .step-line {
+      width: 32px;
+      height: 2px;
+      background: var(--gray-200);
+      margin: 0 8px;
+      flex-shrink: 0;
+    }
+
+    .step-line.active {
+      background: var(--blue);
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-row {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      font-size: .88rem;
+      color: var(--dark);
+      margin-bottom: 6px;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1.5px solid var(--gray-200);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-body);
+      font-size: 16px;
+      /* 16px prevents iOS zoom */
+      color: var(--dark);
+      background: var(--white);
+      transition: all .2s;
+      outline: none;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(21, 101, 192, .1);
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: var(--gray-400);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239ca3af' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+      padding-right: 40px;
+    }
+
+    .upload-zone {
+      border: 2px dashed var(--gray-200);
+      border-radius: var(--radius);
+      padding: 32px 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: all .3s;
+      position: relative;
+    }
+
+    .upload-zone:active,
+    .upload-zone.dragover {
+      border-color: var(--blue);
+      background: var(--blue-light);
+    }
+
+    .upload-zone-icon {
+      width: 48px;
+      height: 48px;
+      margin: 0 auto 12px;
+      border-radius: 12px;
+      background: var(--gray-100);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .upload-zone-icon svg {
+      width: 24px;
+      height: 24px;
+      stroke: var(--gray-600);
+      fill: none;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .upload-text {
+      font-weight: 600;
+      color: var(--dark);
+      margin-bottom: 4px;
+      font-size: .9rem;
+    }
+
+    .upload-hint {
+      font-size: .8rem;
+      color: var(--gray-400);
+    }
+
+    .upload-input {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    .file-list {
+      margin-top: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .file-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 14px;
+      background: var(--gray-50);
+      border-radius: var(--radius-sm);
+      font-size: .83rem;
+    }
+
+    .file-item-name {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 500;
+      min-width: 0;
+    }
+
+    .file-item-name span {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .file-item-name svg {
+      width: 16px;
+      height: 16px;
+      stroke: var(--blue);
+      fill: none;
+      stroke-width: 2;
+      flex-shrink: 0;
+    }
+
+    .file-remove {
+      background: none;
+      border: none;
+      color: var(--gray-400);
+      cursor: pointer;
+      padding: 8px;
+      display: flex;
+      align-items: center;
+      min-width: 32px;
+      min-height: 32px;
+      justify-content: center;
+    }
+
+    .file-remove svg {
+      width: 16px;
+      height: 16px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+    }
+
+    .file-remove:active {
+      color: #ef4444;
+    }
+
+    .form-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 28px;
+      padding-top: 20px;
+      border-top: 1px solid var(--gray-100);
+      gap: 12px;
+    }
+
+    .step-section {
+      display: none;
+    }
+
+    .step-section.active {
+      display: block;
+    }
+
+    .checklist {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .checklist-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 14px;
+      background: var(--gray-50);
+      border-radius: var(--radius-sm);
+      font-size: .88rem;
+      color: var(--gray-800);
+    }
+
+    .checklist-icon {
+      width: 22px;
+      height: 22px;
+      background: var(--blue-light);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .checklist-icon svg {
+      width: 12px;
+      height: 12px;
+      stroke: var(--blue);
+      fill: none;
+      stroke-width: 3;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* ============================================
+   MODAL
+   ============================================ */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, .5);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      z-index: 200;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 0;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal {
+      background: var(--white);
+      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+      padding: 36px 24px 40px;
+      text-align: center;
+      width: 100%;
+      animation: modalSlideUp .4s cubic-bezier(.16, 1, .3, 1);
+    }
+
+    @keyframes modalSlideUp {
+      from {
+        transform: translateY(100%);
+      }
+
+      to {
+        transform: translateY(0);
+      }
+    }
+
+    .modal-icon-wrap {
+      width: 64px;
+      height: 64px;
+      background: var(--blue-light);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+    }
+
+    .modal-icon-wrap svg {
+      width: 32px;
+      height: 32px;
+      stroke: var(--blue);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .modal h3 {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+    }
+
+    .modal p {
+      color: var(--gray-600);
+      line-height: 1.55;
+      margin-bottom: 24px;
+      font-size: .9rem;
+    }
+
+    /* ============================================
+   ANIMATIONS
+   ============================================ */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: all .6s cubic-bezier(.16, 1, .3, 1);
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ============================================
+    STICKY SIGNUP BUTTON (HOME)
+    ============================================ */
+    #nav-btn-subscribe {
+      display: none !important;
+    }
+
+    #sticky-signup-btn {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 900;
+      width: calc(100% - 40px);
+      max-width: 360px;
+      box-shadow: 0 8px 25px rgba(21, 101, 192, 0.5);
+      font-size: 1.1rem;
+      padding: 16px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+    }
+
+    .btn-pulse {
+      animation: pulse-blue 2s infinite;
+    }
+
+    @keyframes pulse-blue {
+      0% {
+        box-shadow: 0 0 0 0 rgba(21, 101, 192, 0.7);
+      }
+
+      70% {
+        box-shadow: 0 0 0 15px rgba(21, 101, 192, 0);
+      }
+
+      100% {
+        box-shadow: 0 0 0 0 rgba(21, 101, 192, 0);
+      }
+    }
+
+    /* ============================================
+   TABLET (≥ 640px)
+   ============================================ */
+    @media (min-width: 640px) {
+      :root {
+        --page-pad: 32px;
+        --section-pad-y: 80px;
+      }
+
+      .hero-content h1 {
+        font-size: 2.6rem;
+      }
+
+      .hero-buttons {
+        flex-direction: row;
+      }
+
+      .hero-blob {
+        width: 300px;
+        height: 300px;
+      }
+
+      .section-title {
+        font-size: 2rem;
+      }
+
+      .form-row {
+        flex-direction: row;
+        gap: 16px;
+      }
+
+      .form-row>.form-group {
+        flex: 1;
+      }
+
+      .form-card {
+        padding: 36px 32px;
+      }
+
+      .process-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+
+      .why-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+
+      .modal {
+        border-radius: var(--radius-lg);
+        max-width: 440px;
+        margin: auto;
+      }
+
+      .modal-overlay {
+        align-items: center;
+        padding: 20px;
+      }
+
+      @keyframes modalSlideUp {
+        from {
+          transform: scale(.9) translateY(20px);
+          opacity: 0;
+        }
+
+        to {
+          transform: scale(1) translateY(0);
+          opacity: 1;
+        }
+      }
+
+      .page2-hero h1 {
+        font-size: 2.2rem;
+      }
+    }
+
+    /* ============================================
+   DESKTOP (≥ 1024px)
+   ============================================ */
+    @media (min-width: 1024px) {
+      :root {
+        --page-pad: 48px;
+        --section-pad-y: 100px;
+      }
+
+      /* Nav: show links, hide toggle */
+      .nav-links {
+        display: flex !important;
+        align-items: center;
+        gap: 32px;
+      }
+
+      .nav-links a {
+        font-size: .95rem;
+        font-weight: 500;
+        color: var(--gray-600);
+        text-decoration: none;
+        transition: color .2s;
+        cursor: pointer;
+      }
+
+      .nav-links a:hover {
+        color: var(--dark);
+      }
+
+      .mobile-toggle {
+        display: none;
+      }
+
+      nav {
+        padding: 16px 48px;
+      }
+
+      .logo {
+        font-size: 1.5rem;
+      }
+
+      .logo-icon {
+        width: 38px;
+        height: 38px;
+        border-radius: 10px;
+      }
+
+      /* Hero 2 columns */
+      .hero {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 64px;
+        align-items: center;
+        padding: 160px 48px 80px;
+      }
+
+      .hero-content h1 {
+        font-size: 3.6rem;
+      }
+
+      .hero-content p {
+        font-size: 1.15rem;
+        margin-bottom: 36px;
+      }
+
+      .hero-visual {
+        margin-top: 0;
+        min-height: 460px;
+      }
+
+      .hero-blob {
+        width: 400px;
+        height: 400px;
+      }
+
+      .hero-illustration {
+        max-width: 520px;
+      }
+
+      .floating-card {
+        padding: 14px 20px;
+        border-radius: 16px;
+        font-size: .85rem;
+      }
+
+      .fc-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+      }
+
+      .fc-icon svg {
+        width: 20px;
+        height: 20px;
+      }
+
+      .fc-label {
+        font-size: .85rem;
+      }
+
+      .card-top {
+        right: -10px;
+      }
+
+      .card-mid {
+        left: -20px;
+      }
+
+      .trust-bar {
+        padding: 40px 48px;
+        gap: 56px;
+        justify-content: center;
+      }
+
+      .trust-logos {
+        gap: 48px;
+      }
+
+      .trust-logo {
+        font-size: 1.05rem;
+      }
+
+      .section-title {
+        font-size: 2.6rem;
+      }
+
+      /* Poles 2 cols */
+      .poles-grid {
+        flex-direction: row;
+        gap: 32px;
+      }
+
+      .poles-grid>.pole-card {
+        flex: 1;
+      }
+
+      .pole-card {
+        padding: 40px;
+      }
+
+      .pole-card:hover {
+        border-color: var(--blue);
+        box-shadow: 0 12px 40px rgba(21, 101, 192, .1);
+        transform: translateY(-4px);
+      }
+
+      /* Process 4 cols horizontal */
+      .process-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 24px;
+      }
+
+      .process-card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 32px 24px;
+        position: relative;
+      }
+
+      .process-left {
+        flex-direction: column;
+      }
+
+      .process-arrow {
+        display: block;
+        position: absolute;
+        top: 50%;
+        right: -18px;
+        transform: translateY(-50%);
+        z-index: 2;
+      }
+
+      .process-arrow svg {
+        width: 20px;
+        height: 20px;
+        stroke: var(--gray-400);
+        fill: none;
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      /* Why 3 cols */
+      .why-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+      }
+
+      .why-card {
+        padding: 36px;
+      }
+
+      .why-card::before {
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform .4s ease;
+      }
+
+      .why-card:hover::before {
+        transform: scaleX(1);
+      }
+
+      .why-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 16px 48px rgba(0, 0, 0, .06);
+      }
+
+      /* CTA side by side */
+      .cta-banner {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: 64px 80px;
+        margin: 0 auto 100px;
+        max-width: 1184px;
+      }
+
+      .cta-content h2 {
+        font-size: 2.2rem;
+      }
+
+      .cta-actions {
+        align-items: flex-start;
+      }
+
+      /* Buttons hover effects */
+      .btn-primary:hover {
+        background: #2d3440;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, .15);
+      }
+
+      .btn-blue:hover {
+        background: var(--blue-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(21, 101, 192, .3);
+      }
+
+      .btn-outline:hover {
+        border-color: var(--dark);
+        transform: translateY(-2px);
+      }
+
+      .btn-whatsapp:hover {
+        background: #1da851;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(37, 211, 102, .3);
+      }
+
+      .pole-number {
+        font-size: 4rem;
+      }
+
+      footer {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 40px 48px;
+      }
+
+      .form-card {
+        padding: 48px;
+      }
+
+      .form-row {
+        gap: 20px;
+      }
+
+      .page2-hero {
+        padding: 140px 48px 60px;
+      }
+
+      .page2-hero h1 {
+        font-size: 3rem;
+      }
+
+      .page2-illustration {
+        max-width: 260px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- SVG ICON DEFS -->
+  <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+    <symbol id="i-graduation" viewBox="0 0 24 24">
+      <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+      <path d="M6 12v5c0 1.657 2.686 3 6 3s6-1.343 6-3v-5" />
+    </symbol>
+    <symbol id="i-building" viewBox="0 0 24 24">
+      <rect x="4" y="2" width="16" height="20" rx="2" ry="2" />
+      <path d="M9 22v-4h6v4M8 6h.01M16 6h.01M12 6h.01M12 10h.01M12 14h.01M16 10h.01M16 14h.01M8 10h.01M8 14h.01" />
+    </symbol>
+    <symbol id="i-clipboard" viewBox="0 0 24 24">
+      <rect x="8" y="2" width="8" height="4" rx="1" ry="1" />
+      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
+      <path d="m9 14 2 2 4-4" />
+    </symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24">
+      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+      <path d="m9 12 2 2 4-4" />
+    </symbol>
+    <symbol id="i-check" viewBox="0 0 24 24">
+      <polyline points="20 6 9 17 4 12" />
+    </symbol>
+    <symbol id="i-arrow-r" viewBox="0 0 24 24">
+      <line x1="5" y1="12" x2="19" y2="12" />
+      <polyline points="12 5 19 12 12 19" />
+    </symbol>
+    <symbol id="i-file" viewBox="0 0 24 24">
+      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+      <polyline points="14 2 14 8 20 8" />
+      <line x1="16" y1="13" x2="8" y2="13" />
+      <line x1="16" y1="17" x2="8" y2="17" />
+      <polyline points="10 9 9 9 8 9" />
+    </symbol>
+    <symbol id="i-scroll" viewBox="0 0 24 24">
+      <path d="M8 21h12a2 2 0 0 0 2-2v-2H10v2a2 2 0 1 1-4 0V5a2 2 0 1 0-4 0v3h4" />
+      <path d="M19 17V5a2 2 0 0 0-2-2H4" />
+    </symbol>
+    <symbol id="i-users" viewBox="0 0 24 24">
+      <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+      <circle cx="9" cy="7" r="4" />
+      <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+      <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+    </symbol>
+    <symbol id="i-upload" viewBox="0 0 24 24">
+      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+      <polyline points="17 8 12 3 7 8" />
+      <line x1="12" y1="3" x2="12" y2="15" />
+    </symbol>
+    <symbol id="i-msg" viewBox="0 0 24 24">
+      <path
+        d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+    </symbol>
+    <symbol id="i-quote" viewBox="0 0 24 24">
+      <path
+        d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V21z" />
+      <path
+        d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3z" />
+    </symbol>
+    <symbol id="i-zap" viewBox="0 0 24 24">
+      <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+    </symbol>
+    <symbol id="i-sparkles" viewBox="0 0 24 24">
+      <path
+        d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z" />
+      <path d="M5 3v4M19 17v4M3 5h4M17 19h4" />
+    </symbol>
+    <symbol id="i-search" viewBox="0 0 24 24">
+      <circle cx="11" cy="11" r="8" />
+      <line x1="21" y1="21" x2="16.65" y2="16.65" />
+    </symbol>
+    <symbol id="i-send" viewBox="0 0 24 24">
+      <line x1="22" y1="2" x2="11" y2="13" />
+      <polygon points="22 2 15 22 11 13 2 9 22 2" />
+    </symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24">
+      <path
+        d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
+    </symbol>
+    <symbol id="i-x" viewBox="0 0 24 24">
+      <line x1="18" y1="6" x2="6" y2="18" />
+      <line x1="6" y1="6" x2="18" y2="18" />
+    </symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24">
+      <line x1="3" y1="12" x2="21" y2="12" />
+      <line x1="3" y1="6" x2="21" y2="6" />
+      <line x1="3" y1="18" x2="21" y2="18" />
+    </symbol>
+    <symbol id="i-book" viewBox="0 0 24 24">
+      <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+      <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+    </symbol>
+    <symbol id="i-award" viewBox="0 0 24 24">
+      <circle cx="12" cy="8" r="7" />
+      <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88" />
+    </symbol>
+    <symbol id="i-check-circle" viewBox="0 0 24 24">
+      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+      <polyline points="22 4 12 14.01 9 11.01" />
+    </symbol>
+    <symbol id="i-target" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="10" />
+      <circle cx="12" cy="12" r="6" />
+      <circle cx="12" cy="12" r="2" />
+    </symbol>
+    <symbol id="i-chevron-r" viewBox="0 0 24 24">
+      <polyline points="9 18 15 12 9 6" />
+    </symbol>
+    <symbol id="i-home" viewBox="0 0 24 24">
+      <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+      <polyline points="9 22 9 12 15 12 15 22" />
+    </symbol>
+  </svg>
+
+  <!-- NAVBAR -->
+  <nav>
+    <a class="logo" onclick="showPage('home')">
+      <div class="logo-icon"><svg>
+          <use href="#i-book" />
+        </svg></div>
+      Promoteur des Établissements Privés
+    </a>
+    <ul class="nav-links" id="nav-links">
+      <li><a onclick="showPage('home')">Accueil</a></li>
+      <li><a href="#services" onclick="closeMobile()">Services</a></li>
+      <li><a href="#process" onclick="closeMobile()">Processus</a></li>
+      <li><a href="#pourquoi" onclick="closeMobile()">Pourquoi nous</a></li>
+      <li><a href="login.html" class="btn btn-outline"
+          style="padding: 8px 16px; border-radius: 8px; font-size: 0.9rem;">Connexion</a></li>
+      <li><a id="nav-btn-subscribe" onclick="showPage('subscribe')" class="btn btn-blue"
+          style="color: #ffffff !important"><svg>
+            <use href="#i-send" />
+          </svg> Souscrire</a></li>
+    </ul>
+    <button class="mobile-toggle" onclick="openMobile()" aria-label="Menu">
+      <svg>
+        <use href="#i-menu" />
+      </svg>
+    </button>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobile-menu" onclick="closeMobile()">
+    <div class="mobile-menu-panel" onclick="event.stopPropagation()">
+      <button class="mobile-menu-close" onclick="closeMobile()">
+        <svg>
+          <use href="#i-x" />
+        </svg>
+      </button>
+      <a class="mobile-menu-link" onclick="showPage('home');closeMobile()">
+        <svg>
+          <use href="#i-home" />
+        </svg> Accueil
+      </a>
+      <a class="mobile-menu-link" href="#services" onclick="showPage('home');closeMobile()">
+        <svg>
+          <use href="#i-zap" />
+        </svg> Services
+      </a>
+      <a class="mobile-menu-link" href="#process" onclick="showPage('home');closeMobile()">
+        <svg>
+          <use href="#i-target" />
+        </svg> Processus
+      </a>
+      <a class="mobile-menu-link" href="#pourquoi" onclick="showPage('home');closeMobile()">
+        <svg>
+          <use href="#i-sparkles" />
+        </svg> Pourquoi nous
+      </a>
+      <a class="mobile-menu-link" href="login.html">
+        <svg>
+          <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
+          <polyline points="10 17 15 12 10 7" />
+          <line x1="15" y1="12" x2="3" y2="12" />
+        </svg> Connexion
+      </a>
+      <div class="mobile-menu-cta">
+        <button class="btn btn-blue btn-full" onclick="showPage('subscribe');closeMobile()"
+          style="color: #ffffff !important">
+          <svg>
+            <use href="#i-send" />
+          </svg> Souscrire
+        </button>
+        <a class="btn btn-whatsapp btn-full" href="https://wa.me/22901XXXXXXXX" target="_blank">
+          <svg>
+            <use href="#i-msg" />
+          </svg> WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== PAGE 1: HOME ==================== -->
+  <div id="page-home" class="page active">
+
+    <section class="hero">
+      <div class="hero-content fade-in">
+        <h1>Sécurisez l'ouverture de votre <span class="highlight">structure éducative</span></h1>
+        <p>Que votre projet relève du Primaire ou du Secondaire, ne laissez rien au hasard. Nous accompagnons les
+          promoteurs privés dans toutes les démarches administratives.</p>
+        <div class="hero-buttons">
+          <a class="btn btn-primary btn-full" onclick="showPage('subscribe')">Commencer maintenant <svg>
+              <use href="#i-arrow-r" />
+            </svg></a>
+          <a href="#services" class="btn btn-outline btn-full">En savoir plus</a>
+        </div>
+      </div>
+      <div class="hero-visual fade-in">
+        <div class="hero-blob"></div>
+        <svg class="hero-illustration" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="100" y="130" width="200" height="170" rx="12" fill="#f0f1f3" stroke="#0f1419" stroke-width="2" />
+          <path d="M80 140 L200 60 L320 140" stroke="#0f1419" stroke-width="2.5" fill="none" stroke-linecap="round"
+            stroke-linejoin="round" />
+          <line x1="200" y1="60" x2="200" y2="30" stroke="#0f1419" stroke-width="2" />
+          <path d="M200 30 L230 42 L200 54" fill="#1565C0" stroke="#0D47A1" stroke-width="1" />
+          <rect x="175" y="240" width="50" height="60" rx="25" fill="#1565C0" opacity=".2" stroke="#1565C0"
+            stroke-width="1.5" />
+          <circle cx="215" cy="274" r="3" fill="#1565C0" />
+          <rect x="125" y="160" width="40" height="35" rx="4" fill="#fff" stroke="#e2e4e8" stroke-width="1.5" />
+          <line x1="145" y1="160" x2="145" y2="195" stroke="#e2e4e8" />
+          <line x1="125" y1="178" x2="165" y2="178" stroke="#e2e4e8" />
+          <rect x="235" y="160" width="40" height="35" rx="4" fill="#fff" stroke="#e2e4e8" stroke-width="1.5" />
+          <line x1="255" y1="160" x2="255" y2="195" stroke="#e2e4e8" />
+          <line x1="235" y1="178" x2="275" y2="178" stroke="#e2e4e8" />
+          <rect x="125" y="210" width="30" height="25" rx="3" fill="#fff" stroke="#e2e4e8" stroke-width="1.5" />
+          <rect x="245" y="210" width="30" height="25" rx="3" fill="#fff" stroke="#e2e4e8" stroke-width="1.5" />
+          <line x1="40" y1="300" x2="360" y2="300" stroke="#e2e4e8" stroke-width="1.5" />
+          <circle cx="60" cy="260" r="24" fill="#E3F2FD" stroke="#1565C0" stroke-width="1.5" />
+          <circle cx="48" cy="272" r="16" fill="#E3F2FD" stroke="#1565C0" stroke-width="1" />
+          <circle cx="74" cy="272" r="16" fill="#E3F2FD" stroke="#1565C0" stroke-width="1" />
+          <line x1="60" y1="280" x2="60" y2="300" stroke="#9ca3af" stroke-width="2" />
+          <circle cx="350" cy="264" r="20" fill="#E3F2FD" stroke="#1565C0" stroke-width="1.5" />
+          <circle cx="340" cy="274" r="14" fill="#E3F2FD" stroke="#1565C0" stroke-width="1" />
+          <circle cx="360" cy="275" r="13" fill="#E3F2FD" stroke="#1565C0" stroke-width="1" />
+          <line x1="350" y1="282" x2="350" y2="300" stroke="#9ca3af" stroke-width="2" />
+          <path d="M340 100 L343 110 L353 110 L345 116 L348 126 L340 120 L332 126 L335 116 L327 110 L337 110Z"
+            fill="#1565C0" opacity=".3" />
+          <circle cx="50" cy="120" r="4" fill="#1565C0" opacity=".2" />
+          <circle cx="70" cy="100" r="2" fill="#1565C0" opacity=".3" />
+          <g transform="rotate(-15, 330, 160)">
+            <rect x="310" y="140" width="40" height="50" rx="4" fill="#fff" stroke="#1565C0" stroke-width="1.5" />
+            <line x1="318" y1="154" x2="342" y2="154" stroke="#E3F2FD" stroke-width="2" />
+            <line x1="318" y1="162" x2="338" y2="162" stroke="#E3F2FD" stroke-width="2" />
+            <line x1="318" y1="170" x2="334" y2="170" stroke="#E3F2FD" stroke-width="2" />
+            <path d="M335 178 L339 182 L347 174" stroke="#1565C0" stroke-width="2" fill="none" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </g>
+        </svg>
+        <div class="floating-card card-top">
+          <div class="fc-icon fc-icon-blue"><svg>
+              <use href="#i-clipboard" />
+            </svg></div>
+          <div class="fc-text">
+            <div class="fc-label">Dossier validé</div>
+            <div class="fc-sub">Autorisation MEMP</div>
+          </div>
+        </div>
+        <div class="floating-card card-mid">
+          <div class="fc-icon fc-icon-dark"><svg>
+              <use href="#i-shield" />
+            </svg></div>
+          <div class="fc-text">
+            <div class="fc-label">Zéro rejet</div>
+            <div class="fc-sub">Audit complet</div>
+          </div>
+        </div>
+        <div class="floating-card card-bot">
+          <div class="fc-icon fc-icon-blue"><svg>
+              <use href="#i-check-circle" />
+            </svg></div>
+          <div class="fc-text">
+            <div class="fc-label">École ouverte</div>
+            <div class="fc-sub">Conformité assurée</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="trust-bar fade-in">
+      <span class="trust-label">Structures partenaires</span>
+      <div class="trust-logos">
+        <span class="trust-logo">MEMP</span><span class="trust-logo">MESTFP</span><span
+          class="trust-logo">DPAF</span><span class="trust-logo">ESG</span><span class="trust-logo">EFTP</span>
+      </div>
+    </div>
+
+    <section class="section" id="services">
+      <div class="section-header fade-in">
+        <div class="section-tag"><svg>
+            <use href="#i-zap" />
+          </svg> Services</div>
+        <h2 class="section-title">Nos deux pôles d'expertise</h2>
+        <p class="section-desc">Un accompagnement sur mesure selon le type d'établissement que vous souhaitez créer.</p>
+      </div>
+      <div class="poles-grid">
+        <div class="pole-card fade-in">
+          <span class="pole-number">01</span>
+          <div class="pole-icon-wrap"><svg>
+              <use href="#i-graduation" />
+            </svg></div>
+          <div class="pole-label">Pôle MEMP</div>
+          <div class="pole-sublabel">Écoles Maternelles et Primaires</div>
+          <p class="pole-desc">Tout l'accompagnement nécessaire pour créer et ouvrir votre école en toute légalité.</p>
+          <div class="pole-items">
+            <div class="pole-item">
+              <div class="pole-item-icon"><svg>
+                  <use href="#i-check" />
+                </svg></div><span>Accompagnement pour l'obtention de l'autorisation de création et d'ouverture
+                d'Écoles</span>
+            </div>
+            <div class="pole-item">
+              <div class="pole-item-icon"><svg>
+                  <use href="#i-check" />
+                </svg></div><span>Mise en conformité avec les normes de la carte scolaire</span>
+            </div>
+          </div>
+        </div>
+        <div class="pole-card dark fade-in">
+          <span class="pole-number">02</span>
+          <div class="pole-icon-wrap"><svg>
+              <use href="#i-building" />
+            </svg></div>
+          <div class="pole-label">Pôle MESTFP</div>
+          <div class="pole-sublabel">Établissements & Centres de Formation</div>
+          <p class="pole-desc">Des procédures maîtrisées pour les établissements secondaires et les centres de
+            formation.</p>
+          <div class="pole-items">
+            <div class="pole-item">
+              <div class="pole-item-icon"><svg>
+                  <use href="#i-check" />
+                </svg></div><span>Dossiers d'agrément pour les Établissements d'Enseignement Secondaire Général
+                (ESG)</span>
+            </div>
+            <div class="pole-item">
+              <div class="pole-item-icon"><svg>
+                  <use href="#i-check" />
+                </svg></div><span>Procédures spécifiques pour les Centres de Formation Professionnelle et Technique
+                (EFTP)</span>
+            </div>
+            <div class="pole-item">
+              <div class="pole-item-icon"><svg>
+                  <use href="#i-check" />
+                </svg></div><span>Alignement sur les normes de la carte scolaire</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="process-section" id="process">
+      <div class="process-inner">
+        <div class="section-header fade-in">
+          <div class="section-tag"><svg>
+              <use href="#i-target" />
+            </svg> Processus</div>
+          <h2 class="section-title">Comment ça marche ?</h2>
+          <p class="section-desc">Un parcours simple et structuré pour vous accompagner du début à la fin.</p>
+        </div>
+        <div class="process-grid">
+          <div class="process-card fade-in">
+            <div class="process-left">
+              <div class="process-num">1</div>
+              <div class="process-icon"><svg>
+                  <use href="#i-phone" />
+                </svg></div>
+            </div>
+            <div class="process-right">
+              <div class="process-title">Prise de contact</div>
+              <p class="process-desc">Appelez-nous ou remplissez le formulaire en ligne. Nous évaluons votre projet
+                gratuitement.</p>
+            </div>
+            <div class="process-arrow"><svg>
+                <use href="#i-chevron-r" />
+              </svg></div>
+          </div>
+          <div class="process-card fade-in">
+            <div class="process-left">
+              <div class="process-num">2</div>
+              <div class="process-icon"><svg>
+                  <use href="#i-search" />
+                </svg></div>
+            </div>
+            <div class="process-right">
+              <div class="process-title">Audit du dossier</div>
+              <p class="process-desc">Vérification complète de vos pièces : titres, plans, diplômes. Zéro risque de
+                rejet.</p>
+            </div>
+            <div class="process-arrow"><svg>
+                <use href="#i-chevron-r" />
+              </svg></div>
+          </div>
+          <div class="process-card fade-in">
+            <div class="process-left">
+              <div class="process-num">3</div>
+              <div class="process-icon"><svg>
+                  <use href="#i-file" />
+                </svg></div>
+            </div>
+            <div class="process-right">
+              <div class="process-title">Montage & dépôt</div>
+              <p class="process-desc">Constitution du dossier conforme et dépôt auprès des autorités compétentes.</p>
+            </div>
+            <div class="process-arrow"><svg>
+                <use href="#i-chevron-r" />
+              </svg></div>
+          </div>
+          <div class="process-card fade-in">
+            <div class="process-left">
+              <div class="process-num">4</div>
+              <div class="process-icon"><svg>
+                  <use href="#i-award" />
+                </svg></div>
+            </div>
+            <div class="process-right">
+              <div class="process-title">Autorisation obtenue</div>
+              <p class="process-desc">Suivi jusqu'à l'obtention de votre autorisation. Votre école peut ouvrir ses
+                portes !</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="pourquoi">
+      <div class="section-header fade-in">
+        <div class="section-tag"><svg>
+            <use href="#i-sparkles" />
+          </svg> Avantages</div>
+        <h2 class="section-title">Pourquoi nous choisir ?</h2>
+        <p class="section-desc">Une expertise terrain et une connaissance approfondie des rouages administratifs.</p>
+      </div>
+      <div class="why-grid">
+        <div class="why-card fade-in">
+          <div class="why-icon"><svg>
+              <use href="#i-scroll" />
+            </svg></div>
+          <div class="why-title">Maîtrise des textes</div>
+          <p class="why-desc">Nous parlons le langage de l'administration. Chaque document est rédigé selon les
+            exigences officielles en vigueur.</p>
+        </div>
+        <div class="why-card fade-in">
+          <div class="why-icon"><svg>
+              <use href="#i-shield" />
+            </svg></div>
+          <div class="why-title">Zéro Rejet</div>
+          <p class="why-desc">Audit complet de vos pièces — titres de propriété, plans de masse, diplômes du directeur —
+            avant tout dépôt.</p>
+        </div>
+        <div class="why-card fade-in">
+          <div class="why-icon"><svg>
+              <use href="#i-users" />
+            </svg></div>
+          <div class="why-title">Suivi de proximité</div>
+          <p class="why-desc">Nous faisons le pont entre vous, les directions départementales et les Directions de la
+            Planification, de l'Administration et des Finances (DPAF).</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:0">
+      <div class="cta-banner fade-in">
+        <div class="cta-content">
+          <h2>Prêt à lancer votre projet ?</h2>
+          <p>Laissez-nous sécuriser votre parcours administratif et transformer votre vision en réalité.</p>
+          <div class="cta-quote"><svg>
+              <use href="#i-quote" />
+            </svg> Un dossier bien monté est une autorisation déjà acquise.</div>
+        </div>
+        <div class="cta-actions">
+          <a class="btn btn-blue btn-full" onclick="showPage('subscribe')" style="color: #ffffff !important">Souscrire
+            maintenant <svg>
+              <use href="#i-arrow-r" />
+            </svg></a>
+          <a class="btn btn-whatsapp btn-full" href="https://wa.me/22901XXXXXXXX" target="_blank"><svg>
+              <use href="#i-msg" />
+            </svg> +229 01XX XXX XXX</a>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <a class="logo" onclick="showPage('home')" style="font-size:1.1rem">
+        <div class="logo-icon" style="width:28px;height:28px;border-radius:8px"><svg style="width:14px;height:14px">
+            <use href="#i-book" />
+          </svg></div>Promoteur des Établissements Privés
+      </a>
+      <p>&copy; 2026 Promoteur des Établissements Privés — Tous droits réservés</p>
+    </footer>
+    <!-- Sticky Button in Page Home -->
+    <a id="sticky-signup-btn" class="btn btn-blue btn-pulse" onclick="showPage('subscribe')"
+      style="color: #ffffff !important">
+      <svg>
+        <use href="#i-send" />
+      </svg> Souscrire maintenant
+    </a>
+  </div>
+
+  <!-- ==================== PAGE 2: SOUSCRIPTION ==================== -->
+  <div id="page-subscribe" class="page">
+    <section class="page2-hero fade-in">
+      <div class="page2-illustration">
+        <svg viewBox="0 0 300 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="75" y="30" width="150" height="180" rx="14" fill="#fff" stroke="#e2e4e8" stroke-width="2" />
+          <rect x="115" y="18" width="70" height="26" rx="13" fill="#1565C0" opacity=".2" stroke="#1565C0"
+            stroke-width="1.5" />
+          <circle cx="150" cy="31" r="5" fill="#1565C0" />
+          <rect x="100" y="70" width="100" height="8" rx="4" fill="#f0f1f3" />
+          <rect x="100" y="90" width="80" height="8" rx="4" fill="#f0f1f3" />
+          <rect x="100" y="110" width="90" height="8" rx="4" fill="#f0f1f3" />
+          <rect x="100" y="130" width="60" height="8" rx="4" fill="#f0f1f3" />
+          <circle cx="88" cy="74" r="6" fill="#E3F2FD" />
+          <path d="M85 74 L87 76 L91 72" stroke="#1565C0" stroke-width="1.5" fill="none" stroke-linecap="round"
+            stroke-linejoin="round" />
+          <circle cx="88" cy="94" r="6" fill="#E3F2FD" />
+          <path d="M85 94 L87 96 L91 92" stroke="#1565C0" stroke-width="1.5" fill="none" stroke-linecap="round"
+            stroke-linejoin="round" />
+          <circle cx="88" cy="114" r="6" fill="#E3F2FD" />
+          <path d="M85 114 L87 116 L91 112" stroke="#1565C0" stroke-width="1.5" fill="none" stroke-linecap="round"
+            stroke-linejoin="round" />
+          <g transform="rotate(25, 220, 100)">
+            <rect x="210" y="50" width="8" height="70" rx="3" fill="#0f1419" />
+            <polygon points="210,120 214,135 218,120" fill="#0f1419" />
+            <rect x="210" y="50" width="8" height="10" rx="2" fill="#1565C0" />
+          </g>
+          <circle cx="40" cy="60" r="4" fill="#1565C0" opacity=".2" />
+          <circle cx="260" cy="170" r="3" fill="#1565C0" opacity=".3" />
+          <circle cx="50" cy="160" r="6" fill="#E3F2FD" />
+          <path d="M260 50 L263 58 L271 58 L265 63 L267 71 L260 66 L253 71 L255 63 L249 58 L257 58Z" fill="#1565C0"
+            opacity=".15" />
+        </svg>
+      </div>
+      <div class="section-tag"><svg>
+          <use href="#i-file" />
+        </svg> Inscription</div>
+      <h1>Souscrivez à nos services</h1>
+      <p>Remplissez le formulaire ci-dessous et déposez vos documents. Notre équipe prendra contact avec vous sous 48h.
+      </p>
+    </section>
+
+    <div class="form-container">
+      <div class="form-card fade-in">
+        <div class="form-steps">
+          <div class="step active" id="step-ind-1">
+            <div class="step-num">1</div><span class="step-label">Infos</span>
+          </div>
+          <div class="step-line" id="step-line-1"></div>
+          <div class="step" id="step-ind-2">
+            <div class="step-num">2</div><span class="step-label">Documents</span>
+          </div>
+          <div class="step-line" id="step-line-2"></div>
+          <div class="step" id="step-ind-3">
+            <div class="step-num">3</div><span class="step-label">Confirmer</span>
+          </div>
+        </div>
+
+        <!-- STEP 1 -->
+        <div class="step-section active" id="step-1">
+          <div class="form-row">
+            <div class="form-group"><label>Nom complet *</label><input type="text" placeholder="Ex: Jean Koffi"
+                id="fullname"></div>
+            <div class="form-group"><label>Téléphone / WhatsApp *</label><input type="tel"
+                placeholder="+229 XX XX XX XX" id="phone"></div>
+          </div>
+          <div class="form-group"><label>Adresse e-mail *</label><input type="email" placeholder="votre@email.com"
+              id="email"></div>
+          <div class="form-row">
+            <div class="form-group"><label>Type d'établissement *</label>
+              <select id="type-etab">
+                <option value="" disabled selected>Choisir...</option>
+                <option>École Maternelle</option>
+                <option>École Primaire</option>
+                <option>Enseignement Secondaire Général (ESG)</option>
+                <option>Centre de Formation Professionnelle (EFTP)</option>
+              </select>
+            </div>
+            <div class="form-group"><label>Département *</label>
+              <select id="departement">
+                <option value="" disabled selected>Choisir...</option>
+                <option>Alibori</option>
+                <option>Atacora</option>
+                <option>Atlantique</option>
+                <option>Borgou</option>
+                <option>Collines</option>
+                <option>Couffo</option>
+                <option>Donga</option>
+                <option>Littoral</option>
+                <option>Mono</option>
+                <option>Ouémé</option>
+                <option>Plateau</option>
+                <option>Zou</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group"><label>Nom prévu de l'établissement *</label><input type="text"
+              placeholder="Ex: Groupe Scolaire Le Savoir" id="school-name"></div>
+          <div class="form-group"><label>Commentaire</label><textarea placeholder="Décrivez brièvement votre projet..."
+              id="comment"></textarea></div>
+          <div class="form-nav">
+            <div></div><button class="btn btn-primary" onclick="submitStep1()">Soumettre <svg>
+                <use href="#i-arrow-r" />
+              </svg></button>
+          </div>
+        </div>
+
+        <!-- STEP 2 -->
+        <div class="step-section" id="step-2">
+          <p style="margin-bottom:8px;font-weight:600;color:var(--dark)">Documents à fournir :</p>
+          <div class="checklist">
+            <div class="checklist-item">
+              <div class="checklist-icon"><svg>
+                  <use href="#i-check" />
+                </svg></div> Titre de propriété ou contrat de bail
+            </div>
+            <div class="checklist-item">
+              <div class="checklist-icon"><svg>
+                  <use href="#i-check" />
+                </svg></div> Plans de masse du bâtiment
+            </div>
+            <div class="checklist-item">
+              <div class="checklist-icon"><svg>
+                  <use href="#i-check" />
+                </svg></div> Diplômes du directeur pressenti
+            </div>
+            <div class="checklist-item">
+              <div class="checklist-icon"><svg>
+                  <use href="#i-check" />
+                </svg></div> Pièce d'identité du promoteur
+            </div>
+            <div class="checklist-item">
+              <div class="checklist-icon"><svg>
+                  <use href="#i-check" />
+                </svg></div> Tout autre document pertinent
+            </div>
+          </div>
+          <div style="margin-top:24px">
+            <label>Déposez vos fichiers</label>
+            <div class="upload-zone" id="upload-zone">
+              <input type="file" class="upload-input" id="file-input" multiple accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+              <div class="upload-zone-icon"><svg>
+                  <use href="#i-upload" />
+                </svg></div>
+              <div class="upload-text">Appuyez pour ajouter des fichiers</div>
+              <div class="upload-hint">PDF, JPG, PNG, DOC — Max 10 Mo</div>
+            </div>
+            <div class="file-list" id="file-list"></div>
+          </div>
+          <div class="form-nav">
+            <button class="btn btn-outline" onclick="goStep(1)"><svg style="transform:rotate(180deg)">
+                <use href="#i-arrow-r" />
+              </svg> Retour</button>
+            <button class="btn btn-primary" onclick="goStep(3)">Suivant <svg>
+                <use href="#i-arrow-r" />
+              </svg></button>
+          </div>
+        </div>
+
+        <!-- STEP 3 -->
+        <div class="step-section" id="step-3">
+          <div style="text-align:center;padding:16px 0">
+            <div
+              style="width:48px;height:48px;border-radius:12px;background:var(--blue-light);display:flex;align-items:center;justify-content:center;margin:0 auto 14px">
+              <svg
+                style="width:24px;height:24px;stroke:var(--blue-dark);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round">
+                <use href="#i-clipboard" />
+              </svg>
+            </div>
+            <h3 style="font-family:var(--font-display);font-weight:700;font-size:1.2rem;margin-bottom:10px">
+              Récapitulatif</h3>
+            <p style="color:var(--gray-600);margin-bottom:24px;font-size:.9rem">Vérifiez vos informations avant de
+              soumettre.</p>
+          </div>
+          <div id="recap" style="background:var(--gray-50);border-radius:var(--radius);padding:20px;margin-bottom:20px">
+          </div>
+          <div class="form-nav">
+            <button class="btn btn-outline" onclick="goStep(2)"><svg style="transform:rotate(180deg)">
+                <use href="#i-arrow-r" />
+              </svg> Retour</button>
+            <button class="btn btn-blue" onclick="submitForm()"><svg>
+                <use href="#i-check-circle" />
+              </svg> Soumettre</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <a class="logo" onclick="showPage('home')" style="font-size:1.1rem">
+        <div class="logo-icon" style="width:28px;height:28px;border-radius:8px"><svg style="width:14px;height:14px">
+            <use href="#i-book" />
+          </svg></div>Promoteur des Établissements Privés
+      </a>
+      <p>&copy; 2026 Promoteur des Établissements Privés — Tous droits réservés</p>
+    </footer>
+  </div>
+
+  <!-- SUCCESS MODAL -->
+  <div class="modal-overlay" id="success-modal">
+    <div class="modal">
+      <div class="modal-icon-wrap"><svg>
+          <use href="#i-check-circle" />
+        </svg></div>
+      <h3>Dossier soumis !</h3>
+      <p>Merci pour votre confiance. Notre équipe vous contactera dans les 48h via WhatsApp ou e-mail.</p>
+      <button class="btn btn-blue btn-full" onclick="closeModal()">Retour à l'accueil <svg>
+          <use href="#i-arrow-r" />
+        </svg></button>
+    </div>
+  </div>
+
+  <script>
+    // PAGE NAVIGATION
+    function showPage(p) {
+      document.querySelectorAll('.page').forEach(e => e.classList.remove('active'));
+      document.getElementById(p === 'home' ? 'page-home' : 'page-subscribe').classList.add('active');
+      if (p !== 'home') goStep(1);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      setTimeout(initAnimations, 100);
+    }
+
+    // MOBILE MENU
+    function openMobile() {
+      const m = document.getElementById('mobile-menu');
+      m.style.display = 'block';
+      document.body.style.overflow = 'hidden';
+      requestAnimationFrame(() => m.classList.add('open'));
+    }
+
+    function closeMobile() {
+      const m = document.getElementById('mobile-menu');
+      m.classList.remove('open');
+      document.body.style.overflow = '';
+      setTimeout(() => { if (!m.classList.contains('open')) m.style.display = 'none'; }, 350);
+    }
+
+    // MULTI-STEP FORM
+    let currentStep = 1;
+    function goStep(s) {
+      document.querySelectorAll('.step-section').forEach(e => e.classList.remove('active'));
+      document.getElementById('step-' + s).classList.add('active');
+      for (let i = 1; i <= 3; i++) {
+        const ind = document.getElementById('step-ind-' + i);
+        ind.classList.remove('active', 'completed');
+        if (i < s) ind.classList.add('completed');
+        if (i === s) ind.classList.add('active');
+      }
+      for (let i = 1; i <= 2; i++) {
+        document.getElementById('step-line-' + i).classList.toggle('active', i < s);
+      }
+      if (s === 3) buildRecap();
+      currentStep = s;
+      // Scroll form into view on mobile
+      document.querySelector('.form-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function buildRecap() {
+      const g = id => document.getElementById(id).value || '—';
+      const f = uploadedFiles.length;
+      document.getElementById('recap').innerHTML = `
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;font-size:.88rem">
+      <div><strong style="font-size:.72rem;color:var(--gray-400);text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:2px">Nom</strong>${g('fullname')}</div>
+      <div><strong style="font-size:.72rem;color:var(--gray-400);text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:2px">Téléphone</strong>${g('phone')}</div>
+      <div><strong style="font-size:.72rem;color:var(--gray-400);text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:2px">E-mail</strong>${g('email')}</div>
+      <div><strong style="font-size:.72rem;color:var(--gray-400);text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:2px">Type</strong>${g('type-etab')}</div>
+      <div><strong style="font-size:.72rem;color:var(--gray-400);text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:2px">Département</strong>${g('departement')}</div>
+      <div><strong style="font-size:.72rem;color:var(--gray-400);text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:2px">Établissement</strong>${g('school-name')}</div>
+    </div>
+    <div style="margin-top:14px;padding-top:14px;border-top:1px solid var(--gray-200);font-size:.88rem">
+      <strong style="font-size:.72rem;color:var(--gray-400);text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:2px">Fichiers</strong>${f} fichier(s)
+    </div>`;
+    }
+
+    // FILE UPLOAD
+    let uploadedFiles = [];
+    const fileInput = document.getElementById('file-input');
+    const uploadZone = document.getElementById('upload-zone');
+    const fileListEl = document.getElementById('file-list');
+
+    fileInput.addEventListener('change', e => addFiles(e.target.files));
+    uploadZone.addEventListener('dragover', e => { e.preventDefault(); uploadZone.classList.add('dragover'); });
+    uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('dragover'));
+    uploadZone.addEventListener('drop', e => { e.preventDefault(); uploadZone.classList.remove('dragover'); addFiles(e.dataTransfer.files); });
+
+    function addFiles(files) { for (const f of files) uploadedFiles.push(f); renderFiles(); }
+    function removeFile(i) { uploadedFiles.splice(i, 1); renderFiles(); }
+    function renderFiles() {
+      fileListEl.innerHTML = uploadedFiles.map((f, i) =>
+        `<div class="file-item"><span class="file-item-name"><svg><use href="#i-file"/></svg><span>${f.name}</span></span><button class="file-remove" onclick="removeFile(${i})"><svg><use href="#i-x"/></svg></button></div>`
+      ).join('');
+    }
+
+    function submitForm() { document.getElementById('success-modal').classList.add('active'); document.body.style.overflow = 'hidden'; }
+    function closeModal() { document.getElementById('success-modal').classList.remove('active'); document.body.style.overflow = ''; showPage('home'); }
+
+
+    // --- NEW LOGIC FOR SPLIT FLOW ---
+
+    // 1. Check URL Params on Load
+    document.addEventListener('DOMContentLoaded', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const dossierId = urlParams.get('id');
+      const dossierRef = urlParams.get('ref'); // We can use either
+
+      if (dossierId) {
+        loadDossierForStep2(dossierId);
+      }
+    });
+
+    function getDossiers() {
+      return JSON.parse(localStorage.getItem('promoteur_dossiers') || '[]');
+    }
+
+    function saveDossier(dossier) {
+      const dossiers = getDossiers();
+      const index = dossiers.findIndex(d => d.id === dossier.id);
+      if (index >= 0) {
+        dossiers[index] = dossier;
+      } else {
+        dossiers.push(dossier);
+      }
+      localStorage.setItem('promoteur_dossiers', JSON.stringify(dossiers));
+    }
+
+    // 2. Submit Step 1
+    function submitStep1() {
+      const fullname = document.getElementById('fullname').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const typeEtab = document.getElementById('type-etab').value;
+      const departement = document.getElementById('departement').value;
+      const schoolName = document.getElementById('school-name').value.trim();
+      const comment = document.getElementById('comment').value.trim();
+
+      if (!fullname || !phone || !typeEtab || !departement || !email || !schoolName) {
+        alert("Veuillez remplir tous les champs obligatoires (*)");
+        return;
+      }
+
+      const newDossier = {
+        id: 'DOS-' + Date.now().toString().slice(-6),
+        status: 'pending', // pending, approved, completed
+        date: new Date().toISOString(),
+        step1: {
+          fullname, phone, email, typeEtab, departement, schoolName, comment
+        },
+        step2: null
+      };
+
+      saveDossier(newDossier);
+
+      // Show simplified success message for Step 1
+      const modal = document.getElementById('success-modal');
+      modal.querySelector('h3').textContent = "Demande reçue !";
+      modal.querySelector('p').textContent = "Vos informations ont été transmises à l'administrateur. Vous recevrez un lien pour finaliser votre dossier après validation.";
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    // 3. Load Dossier for Step 2
+    function loadDossierForStep2(id) {
+      const dossiers = getDossiers();
+      const dossier = dossiers.find(d => d.id === id);
+
+      if (!dossier) {
+        alert("Dossier introuvable.");
+        return;
+      }
+
+      if (dossier.status === 'pending') {
+        alert("Votre dossier est en cours d'examen par l'administrateur.");
+        return;
+      }
+
+      // status should be 'approved' or 'completed' to view Step 2/3
+      // Pre-fill Step 1 (Read Only)
+      document.getElementById('fullname').value = dossier.step1.fullname;
+      document.getElementById('phone').value = dossier.step1.phone;
+      document.getElementById('email').value = dossier.step1.email;
+      document.getElementById('type-etab').value = dossier.step1.typeEtab;
+      document.getElementById('departement').value = dossier.step1.departement;
+      document.getElementById('school-name').value = dossier.step1.schoolName;
+      document.getElementById('comment').value = dossier.step1.comment;
+
+      // Disable inputs
+      ['fullname', 'phone', 'email', 'typeEtab', 'departement', 'schoolName', 'comment'].forEach(id => {
+        document.getElementById(id).disabled = true;
+      });
+
+      // Add a hidden input to store the ID
+      const idInput = document.createElement('input');
+      idInput.type = 'hidden';
+      idInput.id = 'dossier-id';
+      idInput.value = dossier.id;
+      document.getElementById('step-1').appendChild(idInput);
+
+      // Change "Soumettre" button to "Continuer" logic or just unlock navigation
+      // For now, let's auto-advance to Step 2
+      goStep(2);
+
+      // Update Step 1 Button to allow going to Step 2 if clicked (though weauto-advanced)
+      const step1Btn = document.querySelector("#step-1 .btn-primary");
+      step1Btn.setAttribute("onclick", "goStep(2)");
+      step1Btn.innerHTML = `Suivant <svg><use href="#i-arrow-r" /></svg>`;
+    }
+
+
+    /*
+    // OVERRIDE submitForm for Step 3
+    */
+    const originalSubmitForm = submitForm;
+    submitForm = function () {
+      const dossierId = document.getElementById('dossier-id')?.value;
+      if (!dossierId) {
+        // Fallback for testing without ID / Legacy
+        originalSubmitForm();
+        return;
+      }
+
+      // Save Step 2 & 3 data
+      const dossiers = getDossiers();
+      const dossierIndex = dossiers.findIndex(d => d.id === dossierId);
+
+      if (dossierIndex >= 0) {
+        dossiers[dossierIndex].status = 'completed';
+        dossiers[dossierIndex].step2 = {
+          files: uploadedFiles.map(f => f.name) // processing file objects is tricky in localStorage, saving names
+        };
+        localStorage.setItem('promoteur_dossiers', JSON.stringify(dossiers));
+
+        // Show success modal
+        const modal = document.getElementById('success-modal');
+        modal.querySelector('h3').textContent = "Dossier Finalisé !";
+        modal.querySelector('p').textContent = "Merci. Votre dossier complet a été soumis avec succès.";
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    // SCROLL ANIMATIONS
+    function initAnimations() {
+      const o = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+      }, { threshold: 0.08 });
+      document.querySelectorAll('.fade-in').forEach(el => o.observe(el));
+    }
+    document.addEventListener('DOMContentLoaded', initAnimations);
+  </script>
+</body>
+
+</html>
